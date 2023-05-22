@@ -1,0 +1,2 @@
+module FurimatypesHelper
+end
