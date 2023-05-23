@@ -50,7 +50,7 @@ has_one    :order
 ### Association
 
 belongs_to :item
-has_one    :deliverys
+has_one    :delivery
 
 
 ## deliverys テーブル
