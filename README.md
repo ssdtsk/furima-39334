@@ -3,7 +3,7 @@
 | Column                  | Type       | Options      |
 | ----------------------- | ---------- | ------------ |
 | nickname                | string     | null: false  |
-| email                   | string     | null: false  |
+| email                   | string     | null: false, unique: true |
 | encrypted_password      | string     | null: false  |
 | first_name              | string     | null: false  |
 | last_name               | string     | null: false  |
@@ -31,7 +31,7 @@ has_many :orders
 | delivery_charge_id          | integer    | null: false |
 | delivery_region_id          | integer    | null: false |
 | delivery_day_id             | integer    | null: false |
-| price                       | float      | null: false |
+| price                       | integer    | null: false |
 | user                        | references | null: false, foreign_key: true |
 ### Association
 
@@ -45,7 +45,7 @@ has_one    :order
 
 | Column                      | Type       | Options     |
 | --------------------------- | ---------- | ----------- |
-| item                        | references | null: false, foreign_key: true |
+| user                        | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -58,7 +58,7 @@ has_one    :deliverys
 | Column                      | Type       | Options     |
 | --------------------------- | ---------- | ----------- |
 | post_code                   | string     | null: false |
-| prefectures_id              | integer    | null: false |
+| prefecture_id               | integer    | null: false |
 | municipalities              | string     | null: false |
 | address                     | string     | null: false |
 | building                    | string     |             |
