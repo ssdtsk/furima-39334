@@ -3,7 +3,7 @@
 | Column                  | Type       | Options      |
 | ----------------------- | ---------- | ------------ |
 | nickname                | string     | null: false  |
-| email                   | string     | unique: true |
+| email                   | string     | null: false  |
 | encrypted_password      | string     | null: false  |
 | first_name              | string     | null: false  |
 | last_name               | string     | null: false  |
@@ -14,7 +14,7 @@
 ### Association
 
 has_many :items
-has_many :buys
+has_many :orders
 
 
 
@@ -22,18 +22,17 @@ has_many :buys
 
 ## items テーブル
 
-| Column                   | Type       | Options     |
-| ------------------------ | ---------- | ----------- |
-| product_image            | binary     | null: false |
-| product_name             | string     | null: false |
-| product_description      | text       | null: false |
-| product_detail_category  | integer_id | null: false |
-| product_detail_condition | integer_id | null: false |
-| delivery_charge          | integer_id | null: false |
-| delivery_region          | integer_id | null: false |
-| delivery_day             | integer_id | null: false |
-| price                    | float      | null: false |
-
+| Column                      | Type       | Options     |
+| --------------------------- | ---------- | ----------- |
+| product_name                | string     | null: false |
+| product_description         | text       | null: false |
+| product_detail_category_id  | integer    | null: false |
+| product_detail_condition_id | integer    | null: false |
+| delivery_charge_id          | integer    | null: false |
+| delivery_region_id          | integer    | null: false |
+| delivery_day_id             | integer    | null: false |
+| price                       | float      | null: false |
+| user                        | references | null: false, foreign_key: true |
 ### Association
 
 belongs_to :user
@@ -44,24 +43,27 @@ has_one    :order
 
 ## orders テーブル
 
+| Column                      | Type       | Options     |
+| --------------------------- | ---------- | ----------- |
+| item                        | references | null: false, foreign_key: true |
 
 ### Association
 
-belongs_to :items
+belongs_to :item
 has_one    :deliverys
 
 
 ## deliverys テーブル
 
-| Column                   | Type       | Options     |
-| ------------------------ | ---------- | ----------- |
-| post_code                | string     | null: false |
-| prefectures              | integer_id | null: false |
-| municipalities           | string     | null: false |
-| address                  | string     | null: false |
-| Building                 | string     | null: false |
-| tell                     | string     | null: false |
-
+| Column                      | Type       | Options     |
+| --------------------------- | ---------- | ----------- |
+| post_code                   | string     | null: false |
+| prefectures_id              | integer    | null: false |
+| municipalities              | string     | null: false |
+| address                     | string     | null: false |
+| building                    | string     |             |
+| tell                        | string     | null: false |
+| order                       | references | null: false, foreign_key: true |
 ### Association
 
-belongs_to :orders
+belongs_to :order
