@@ -46,9 +46,11 @@ has_one    :order
 | Column                      | Type       | Options     |
 | --------------------------- | ---------- | ----------- |
 | user                        | references | null: false, foreign_key: true |
+| item                        | references | null: false, foreign_key: true |
 
 ### Association
 
+belongs_to :user
 belongs_to :item
 has_one    :delivery
 
@@ -58,7 +60,7 @@ has_one    :delivery
 | Column                      | Type       | Options     |
 | --------------------------- | ---------- | ----------- |
 | post_code                   | string     | null: false |
-| prefecture_id               | integer    | null: false |
+| prefectures_id              | integer    | null: false |
 | municipalities              | string     | null: false |
 | address                     | string     | null: false |
 | building                    | string     |             |
