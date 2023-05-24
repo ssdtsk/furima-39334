@@ -29,7 +29,7 @@ has_many :orders
 | product_detail_category_id  | integer    | null: false |
 | product_detail_condition_id | integer    | null: false |
 | delivery_charge_id          | integer    | null: false |
-| delivery_region_id          | integer    | null: false |
+| prefecture_id               | integer    | null: false |
 | delivery_day_id             | integer    | null: false |
 | price                       | integer    | null: false |
 | user                        | references | null: false, foreign_key: true |
@@ -60,7 +60,7 @@ has_one    :delivery
 | Column                      | Type       | Options     |
 | --------------------------- | ---------- | ----------- |
 | post_code                   | string     | null: false |
-| prefectures_id              | integer    | null: false |
+| prefecture_id               | integer    | null: false |
 | municipalities              | string     | null: false |
 | address                     | string     | null: false |
 | building                    | string     |             |
