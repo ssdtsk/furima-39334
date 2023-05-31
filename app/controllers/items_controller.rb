@@ -2,7 +2,6 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @items = Item.all
     @items = Item.order("created_at DESC")
   end
 
@@ -13,7 +12,7 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      redirect_to @item, notice: 'アイテムが出品されました。'
+      redirect_to root_path, notice: 'アイテムが出品されました。'
     else
       render :new
     end
