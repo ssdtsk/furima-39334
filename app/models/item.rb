@@ -10,6 +10,7 @@ class Item < ApplicationRecord
   belongs_to :prefecture
   belongs_to :delivery_day
 
+  validates :image, presence: true
   validates :product_name, presence: true
   validates :product_description, presence: true
   validates :product_detail_category_id, presence: true

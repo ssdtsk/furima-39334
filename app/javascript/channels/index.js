@@ -5,13 +5,11 @@ window.addEventListener('load', () => {
     const addTaxDom = document.getElementById("add-tax-price");
     const addProfit = document.getElementById("profit");
 
-    // 入力した金額の10%を計算する
-    const tax = inputValue * 0.1;
+    const tax = Math.round(inputValue * 0.1);
 
     addTaxDom.innerHTML = tax;
     
-    // item-priceの入力された値からadd-tax-priceを引いた値を計算する
-    const profit = inputValue - tax;
+    const profit = Math.round(inputValue - tax);
     addProfit.innerHTML = profit;
   })
 })
