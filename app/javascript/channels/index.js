@@ -1,5 +1,15 @@
-// Load all the channels within this directory and all subdirectories.
-// Channel files must be named *_channel.js.
+window.addEventListener('load', () => {
+  const priceInput = document.getElementById("item-price");
+  priceInput.addEventListener("input", () => {
+    const inputValue = priceInput.value;
+    const addTaxDom = document.getElementById("add-tax-price");
+    const addProfit = document.getElementById("profit");
 
-const channels = require.context('.', true, /_channel\.js$/)
-channels.keys().forEach(channels)
+    const tax = Math.floor(inputValue * 0.1);
+
+    addTaxDom.innerHTML = tax;
+    
+    const profit = Math.floor(inputValue - tax);
+    addProfit.innerHTML = profit;
+  })
+})

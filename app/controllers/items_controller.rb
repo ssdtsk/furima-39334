@@ -1,9 +1,8 @@
 class ItemsController < ApplicationController
-
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @item = Item.all
+    #@items = Item.order("created_at DESC")
   end
 
   def new
@@ -11,25 +10,30 @@ class ItemsController < ApplicationController
   end
 
   def create
-    @item = item.new
-  end
-
-  def edit
-  end
-
-  def update
-    @item = item.find(params[:id])
-    if current_user.update(user_params)
-      redirect_to root_path
+    @item = Item.new(item_params)
+    if @item.save
+      redirect_to root_path, notice: 'アイテムが出品されました。'
     else
-      render :edit
+      render :new
     end
   end
 
+  #def edit
+    #@item = Item.find(params[:id])
+  #end
+
+ # def update
+    #@item = Item.find(params[:id])
+    #if @item.update(item_params)
+      #redirect_to root_path
+    #else
+      #render :edit
+    #end
+  #end
+
   private
 
-  def user_params
-    params.require(:user).permit(:nickname, :email, :encrypted_password, :last_name, :first_name, :first_name_kana,:last_name_kana,:birthday)
+  def item_params
+    params.require(:item).permit(:image, :product_name, :product_description, :product_detail_category_id, :product_detail_condition_id, :delivery_charge_id, :prefecture_id, :delivery_day_id, :price).merge(user_id: current_user.id)
   end
-
 end
