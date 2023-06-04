@@ -1,8 +1,18 @@
 class Order < ApplicationRecord
-  belongs_to :user
-  belongs_to :item
-  has_one :delivery
+  include ActiveModel::Model
+
+  attr_accessor :user_id, :item_id
 
   validates :user_id, presence: true
   validates :item_id, presence: true
+
+  def save
+    if valid?
+      order = Order.new(user_id: user_id, item_id: item_id)
+      order.save
+      true
+    else
+      false
+    end
+  end
 end

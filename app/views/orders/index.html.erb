@@ -1,5 +1,7 @@
 <%= render "shared/second-header"%>
-
+<%= form_with(model: Order.new, url: orders_path) do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.hidden_field :item_id, value: @item.id %>
 <div class='transaction-contents'>
   <div class='transaction-main'>
     <h1 class='transaction-title-text'>
@@ -127,4 +129,5 @@
     <% end %>
   </div>
 </div>
+<% end %>
 <%= render "shared/second-footer"%>
