@@ -34,6 +34,11 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def destroy
+    @item.destroy
+    redirect_to root_path, notice: '商品が削除されました。'
+  end
+
   private
 
   def set_item

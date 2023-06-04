@@ -26,10 +26,8 @@
     <% if user_signed_in? %>
       <% if current_user == @item.user %>
         <%= link_to "商品の編集", edit_item_path(@item), method: :get, class: "item-red-btn" %>
-        <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>  
-    <%#削除機能追加時変更 link_to "削除", item_path(@item), method: :delete, class: "item-destroy" %>
+        <%= link_to "削除", item_path(@item), method: :delete, class: "item-destroy" %>
       <% elsif current_user != @item.user %>
-    <%# 商品の販売状況に関わらずトップページに遷移するように変更 %>
         <%= link_to "購入画面に進む", root_path, class: "item-red-btn" %>
       <% end %>
     <% end %>
