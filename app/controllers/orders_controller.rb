@@ -1,20 +1,25 @@
 class OrdersController < ApplicationController
+
+
     def index
-      @items = Item.all # Assuming you want to fetch all items here
-      @item = @items.first 
+      @order_form = OrderForm.new
+      @item = Item.find(params[:item_id])
     end
-  
     def create
-      @order = Order.new(order_params)
-      if @order.save
-        # レコード保存成功時の処理
-        redirect_to orders_path, notice: '注文が正常に作成されました！'
+      @order_form = OrderForm.new(order_params)
+      if @order_form.valid?
+        @order_form.save(params,current_user.id)
+        return redirect_to root_path
       else
-        # レコード保存失敗時の処理
+        @item = Item.find(params[:item_id])
         render :index
       end
     end
+  
+
+    private
+  
     def order_params
-      params.require(:order).permit(:name, :email, :address) # 保存したいパラメータを指定
+      params.require(:order_form).permit( :post_code, :prefecture_id, :municipalitie, :address, :building, :tell).merge(item_id: params[:item_id], user_id: current_user.id)
     end
 end
