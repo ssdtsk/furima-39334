@@ -1,9 +1,10 @@
 class OrderForm
   include ActiveModel::Model
   
-  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalitie, :building, :address, :tell
-  
+  attr_accessor :user_id, :item_id, :post_code, :prefecture_id, :municipalitie, :building, :address, :tell, :token
+
   with_options presence: true do
+    validates :token, presence: true
     validates :user_id, presence: true
     validates :item_id, presence: true
     validates :post_code, presence: true, format: { with: /\A\d{3}-\d{4}\z/, message: 'is invalid. Enter it as follows (e.g. 123-4567)' }
@@ -15,5 +16,12 @@ class OrderForm
   def save(params,user_id)
     order = Order.create(item_id: params[:item_id].to_i, user_id: user_id)
     Delivery.create(post_code: post_code, prefecture_id: prefecture_id, municipalitie: municipalitie, address: address, building: building, tell: tell, order_id: order.id)
+  end
+  def user=(user)
+    @user_id = user.id
+  end
+
+  def item=(item)
+    @item_id = item.id
   end
 end
