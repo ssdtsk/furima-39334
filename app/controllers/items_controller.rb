@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :check_item_ownership, only: [:edit, :update]
+  before_action :check_sold_out_item, only: [:show]
 
   def index
     @items = Item.order("created_at DESC")
@@ -22,7 +23,11 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      redirect_to item_path(@item), notice: '商品情報が更新されました。'
+      if @item.order.present?
+        redirect_to root_path, notice: '商品情報が更新されました。'
+      else
+        redirect_to item_path(@item), notice: '商品情報が更新されました。'
+      end
     else
       render :edit
     end
@@ -32,6 +37,9 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    if current_user != @item.user || @item.order.present?
+      redirect_to root_path
+    end
   end
 
   def destroy
@@ -50,8 +58,15 @@ class ItemsController < ApplicationController
   end
 
   def check_item_ownership
-    if current_user != @item.user
+    if current_user != @item.user || @item.order.present?
       redirect_to root_path
     end
   end
+
+  def check_sold_out_item
+    if current_user.present? && @item.sold_out?
+      redirect_to root_path
+    end
+  end
+
 end
