@@ -11,7 +11,7 @@ class OrdersController < ApplicationController
     @order_form = OrderForm.new(order_params)
     if @order_form.valid?
       pay_item
-      @order_form.save(params, current_user.id)
+      @order_form.save(params)
       return redirect_to root_path
     else
       render :index
@@ -22,7 +22,6 @@ class OrdersController < ApplicationController
 
   def second_item
     @item = Item.find(params[:item_id])
-    @item.update(sold_out: true) if @item.sold_out?
   end
 
   def order_params
