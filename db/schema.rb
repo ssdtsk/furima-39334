@@ -56,6 +56,11 @@ ActiveRecord::Schema.define(version: 2023_05_29_093945) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "forms", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "product_name", null: false
     t.text "product_description", null: false
