@@ -46,6 +46,5 @@ class OrdersController < ApplicationController
     else
       redirect_to new_user_session_path
     end
-    @order_form = OrderForm.new
   end
 end
