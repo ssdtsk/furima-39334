@@ -22,11 +22,7 @@ class ItemsController < ApplicationController
 
   def update
     if @item.update(item_params)
-      if @item.order.present?
-        redirect_to item_path(@item), notice: '商品情報が更新されました。'
-      else
-        redirect_to root_path, notice: '商品情報が更新されました。'
-      end
+      redirect_to item_path(@item), notice: '商品情報が更新されました。'
     else
       render :edit
     end
